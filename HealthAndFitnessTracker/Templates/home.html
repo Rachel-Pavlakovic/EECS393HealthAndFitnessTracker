@@ -1,7 +1,37 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Health and Fitness Tracker </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-{% block title %}Login{% endblock %}
+        .navbar {
 
-{% block content %}
-  <h2>What would you like to do: </h2>
-{% endblock %}
+        }
+    </style>
+</head>
+<body>
+
+<h1> Health and Fitness Tracker </h1>
+    {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+      <a href="{% url 'logout' %}">logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">login</a>
+    {% endif %}
+<p> What would you like to do? </p>
+
+<div class="navbar">
+    <a href="#">Link</a>
+    <a href="#">Link</a>
+    <a href="#">Link</a>
+    <a href="#" class="right">Link</a>
+</div>
+
+</body>
+</html>
+

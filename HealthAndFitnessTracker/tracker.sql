@@ -56,6 +56,12 @@ INSERT INTO food VALUES (Egg, 1.00, 143);
 INSERT INTO food VALUES (Deviled Egg, 1.00, 160);
 INSERT INTO food VALUES (Brocoli, 0.777, 34);
 INSERT INTO food VALUES (Lettuce, 0.3, 14);
+INSERT INTO food VALUES (Hot Dog, 0.9, 247);
+INSERT INTO food VALUES (Avocado, 0.63, 160);
+INSERT INTO food VALUES (Pasta, 0.64, 158);
+INSERT INTO food VALUES (Choclate Chip Cookie, 0.65, 458);
+INSERT INTO food VALUES (Clam Chowder, 1.07, 84);
+INSERT INTO food VALUES (Apple Pie, 1.11, 253);
 
 INSERT INTO drink VALUES (Diet Coke, 1.045, 0);
 INSERT INTO drink VALUES (Classic Coke, 1.11, 11.83);

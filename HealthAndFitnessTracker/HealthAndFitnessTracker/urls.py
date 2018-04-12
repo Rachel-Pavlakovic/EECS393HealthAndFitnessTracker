@@ -16,16 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.views.generic.base import TemplateView
+from Tracker.views import *
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^home', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^foodTracker', TemplateView.as_view(template_name='foodTracker.html'), name='foodTracker'),
-    url(r'^waterTracker', TemplateView.as_view(template_name='waterTracker.html'), name='waterTracker'),
-    url(r'^exerciseTracker', TemplateView.as_view(template_name='exerciseTracker.html'), name='exerciseTracker'),
-    url(r'^settingsAndProfile', TemplateView.as_view(template_name='settingsAndProfile.html'), name='settingsAndProfile'),
+    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^home', HomePageView.as_view(), name='home'),
+    url(r'^foodTracker', foodTracker.as_view(), name='foodTracker'),
+    url(r'^waterTracker', waterTracker.as_view(), name='waterTracker'),
+    url(r'^exerciseTracker', exerciseTracker.as_view(), name='exerciseTracker'),
+    url(r'^settingsAndProfile', settingsAndProfile.as_view(), name='settingsAndProfile'),
     url(r'^admin/', admin.site.urls),
 ]

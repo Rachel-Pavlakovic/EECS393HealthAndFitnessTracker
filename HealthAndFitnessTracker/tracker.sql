@@ -60,6 +60,17 @@ INSERT INTO food VALUES (Lettuce, 0.3, 14);
 INSERT INTO drink VALUES (Diet Coke, 1.045, 0);
 INSERT INTO drink VALUES (Classic Coke, 1.11, 11.83);
 INSERT INTO drink VALUES (Water, 1, 0);
+INSERT INTO drink VALUES (Lactose Free Milk: Skim, 1.023, 11.25);
+INSERT INTO drink VALUES (Apple Juice, 1.05, 14);
+INSERT INTO drink VALUES (Orange Juice, 1.25, 14);
+INSERT INTO drink VALUES (Wine, 0.98, 24);
+INSERT INTO drink VALUES (Margaritas, 0.94, 56.6);
+INSERT INTO drink VALUES (Beer, 1.060, 13);
+INSERT INTO drink VALUES (Vodka, 0.79, 64);
+INSERT INTO drink VALUES (Milk: skim, 1.035, 11.25);
+INSERT INTO drink VALUES (Coffee, 1, 0.25);
+INSERT INTO drink VALUES (Green Tea, 1, 0.25);
+INSERT INTO drink VALUES (Powerade, 1.03, 6.25);
 
 INSERT INTO exercise VALUES (Running, 400);
 INSERT INTO exercise VALUES (Swimming, 413);

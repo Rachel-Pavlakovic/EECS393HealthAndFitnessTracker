@@ -17,7 +17,7 @@ Users have the option to set up alerts and reminders for things like drinking or
 2. `pip freeze > requirements.txt`
 3.  everyone else rerun `pip install -r requirements.txt`
 
-# To start the webiste
+# To start the website
 In the virtual environment: `python manage.py runserver`
 
 # To run tests

@@ -62,6 +62,18 @@ INSERT INTO food VALUES (Pasta, 0.64, 158);
 INSERT INTO food VALUES (Choclate Chip Cookie, 0.65, 458);
 INSERT INTO food VALUES (Clam Chowder, 1.07, 84);
 INSERT INTO food VALUES (Apple Pie, 1.11, 253);
+INSERT INTO food VALUES (Pecan Pie, 1.21, 412);
+INSERT INTO food VALUES (Pork Stew, 0.83, 87);
+INSERT INTO food VALUES (Beef Stew, 0.83, 99);
+INSERT INTO food VALUES (Chicken Pot Pie, 0.92, 177);
+INSERT INTO food VALUES (Buffalo Wings, 0.61, 277);
+INSERT INTO food VALUES (Meatloaf, 1.006, 149);
+INSERT INTO food VALUES (Ground Beef, 1.006, 332);
+INSERT INTO food VALUES (Hamburger, 0.87, 295);
+INSERT INTO food VALUES (French Fries, 0.63, 312);
+INSERT INTO food VALUES (Oreos, 0.964, 480);
+INSERT INTO food VALUES (Donuts, 0.310, 452);
+INSERT INTO food VALUES (Tacos, 0.56, 226);
 
 INSERT INTO drink VALUES (Diet Coke, 1.045, 0);
 INSERT INTO drink VALUES (Classic Coke, 1.11, 11.83);

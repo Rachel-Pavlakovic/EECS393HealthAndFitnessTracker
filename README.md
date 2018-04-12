@@ -19,3 +19,11 @@ Users have the option to set up alerts and reminders for things like drinking or
 
 # To start the webiste
 In the virtual environment: `python manage.py runserver`
+
+# To run tests
+In the virtual environment: `python manage.py test`
+
+# To run tests with code coverage
+In the virtual environment: `coverage run --source='.' manage.py test`
+                            `coverage report`
+

@@ -40,6 +40,7 @@ class ExerciseInformation(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=128)
+    passord = models.CharField(max_length=128)
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gender = models.CharField(max_length=25)
@@ -108,4 +109,4 @@ class ExerciseForm(ModelForm):
 class UserInformationForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email'] 
+        fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email'] 

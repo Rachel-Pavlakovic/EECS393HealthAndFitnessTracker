@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 from enum import Enum
 class unit(Enum):
@@ -63,3 +64,45 @@ class UserInformation(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PersonForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ['name']
+
+
+class GroupForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = ['name', 'members']
+
+
+class MembershipForm(ModelForm):
+    class Meta:
+        model = Membership
+        fields = ['person', 'group', 'date_joined', 'invite_reason']
+
+
+class DrinkForm(ModelForm):
+    class Meta:
+        model = Drink
+        fields = ['name', 'calPerFlOz']
+
+
+class FoodForm(ModelForm):
+    class Meta:
+        model = Food
+        fields = ['name', 'density', 'caloricDensity']
+
+
+class ExerciseForm(ModelForm):
+    class Meta:
+        model = Exercise
+        fields = ['name', 'calPerHour']
+
+
+class UserInformationForm(ModelForm):
+    class Meta:
+        model = UserInformation
+        fields = ['username', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email'] 

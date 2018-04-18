@@ -1,8 +1,8 @@
 from django.db import models
 from django.forms import ModelForm
 import datetime
-
 from enum import Enum
+
 class unit(Enum):
     Imperial = 0
     Metric = 1
@@ -12,32 +12,15 @@ class notif(Enum):
     phone = 1
     web = 2
 
-class Person(models.Model):
-    name = models.CharField(max_length=128)
-
-    def __str__(self):
-        return self.name
-
-class Group(models.Model):
-    name = models.CharField(max_length=128)
-    members = models.ManyToManyField(Person, through='Membership')
-
-    def __str__(self):
-        return self.name
-
-class Membership(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    date_joined = models.DateField()
-    invite_reason = models.CharField(max_length=64)
 
 class DrinkInformation(models.Model):
     name = models.CharField(max_length=128)
     calPerFlOz = models.IntegerField(default=0)
-
+    
     def __str__(self):
         return self.name
 
+      
 class FoodInformation(models.Model):
     name = models.CharField(max_length=128)
     denisty = models.FloatField()
@@ -46,12 +29,14 @@ class FoodInformation(models.Model):
     def __str__(self):
         return self.name
 
+
 class ExerciseInformation(models.Model):
     name = models.CharField(max_length=128)
     calPerHour = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+
 
 class User(models.Model):
     username = models.CharField(max_length=128)
@@ -65,6 +50,7 @@ class User(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class FoodLog(models.Model):
     name = models.CharField(max_length=128)
@@ -99,23 +85,6 @@ class ExerciseLog(models.Model):
     def __str__(self):
         return self.name
 
-
-class PersonForm(ModelForm):
-    class Meta:
-        model = Person
-        fields = ['name']
-
-
-class GroupForm(ModelForm):
-    class Meta:
-        model = Group
-        fields = ['name', 'members']
-
-
-class MembershipForm(ModelForm):
-    class Meta:
-        model = Membership
-        fields = ['person', 'group', 'date_joined', 'invite_reason']
 
 
 class DrinkForm(ModelForm):

@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from models import FoodInformation
-from models import DrinkInformation
-from models import ExerciseInformation
+from .models import FoodInformation
+from .models import DrinkInformation
+from .models import ExerciseInformation
 
 class FoodForm(ModelForm):
     class Meta:

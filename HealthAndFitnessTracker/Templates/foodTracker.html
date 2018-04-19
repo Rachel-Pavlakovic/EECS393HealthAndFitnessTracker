@@ -71,10 +71,10 @@
     <h1>See Food History</h1>
 
     {% for food in object_list %}
-    <p> {% {{food.date}} %} {% {{food.time}} %} </p>
-    <p> {% {{food.name}} %} </p>
-    <p> {% {{food.quantity}} %} {% {{food.calories}} %} </p>
-    (% end for %)
+    <p> {{food.date}} {{food.time}} </p>
+    <p> {{food.name}} </p>
+    <p> {{food.quantity}} {{food.calories}} </p>
+    {% endfor %}
 
 </div>
 

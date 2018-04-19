@@ -69,7 +69,11 @@
 
 <div class="section">
     <h1>See Exercise History</h1>
-    <p>This is where we should allow the users to see their past day/week/month of exercise and calories burned</p>
+    {% for exercise in object_list %}
+    <p> {{exercise.date}} {{exercise.time}} </p>
+    <p> {{exercise.name}} </p>
+    <p> {{exercise.duration}} {{exercise.calories}} </p>
+    {% endfor %}
 </div>
 
 <div class="navbar">

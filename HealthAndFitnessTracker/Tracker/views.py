@@ -6,30 +6,35 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 import datetime
-
+from django.views.generic import ListView
+from .models import *
 
 class HomePageView(TemplateView):
-
     template_name = "home.html"
 
-class foodTracker(TemplateView):
-
+class foodTracker(ListView):
     template_name = "foodTracker.html"
 
-class waterTracker(TemplateView):
+    def get_queryset(self):
+        return FoodLog.objects.all()
 
+
+class waterTracker(ListView):
     template_name = "waterTracker.html"
 
-class exerciseTracker(TemplateView):
+    def get_queryset(self):
+        return DrinkLog.objects.all()
 
+class exerciseTracker(ListView):
     template_name = "exerciseTracker.html"
 
-class settingsAndProfile(TemplateView):
+    def get_queryset(self):
+        return ExerciseLog.objects.all()
 
+class settingsAndProfile(TemplateView):
     template_name = "settingsAndProfile.html"
 
 class createUser(FormView):
-
     template_name = "createUser.html"
     form_class = UserInformationForm
 
@@ -44,7 +49,6 @@ class createUser(FormView):
             form = UserInformationForm()
 
         return render(request, 'createUser.html', {'form': form})
-
 
 class addfood(FormView):
     template_name = "addfood.html"
@@ -64,3 +68,4 @@ class addfood(FormView):
             form = FoodForm()
 
         return render(request, 'addfood.html', {'form': form})
+

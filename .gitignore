@@ -106,3 +106,4 @@ venv.bak/
 # Annoying workspace stuff
 .idea/
 .idea/workspace.xml
+HealthAndFitnessTracker/db.sqlite3

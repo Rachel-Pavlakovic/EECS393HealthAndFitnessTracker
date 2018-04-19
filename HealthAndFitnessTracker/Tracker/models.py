@@ -1,6 +1,9 @@
 from django.db import models
 from django.forms import ModelForm
-import datetime
+from datetime import datetime
+from django.conf import settings
+from django.utils import timezone
+
 
 class DrinkInformation(models.Model):
     name = models.CharField(max_length=128)
@@ -56,11 +59,11 @@ class User(models.Model):
 class FoodLog(models.Model):
     name = models.CharField(max_length=128)
     quantity = models.IntegerField(default=0)
-    date = models.DateField()
-    time = models.TimeField()
+    #usage
+    date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
@@ -94,23 +97,3 @@ class ExerciseLog(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-class DrinkForm(ModelForm):
-    class Meta:
-        model = DrinkInformation
-        fields = ['name', 'calPerFlOz']
-
-
-class FoodForm(ModelForm):
-    class Meta:
-        model = FoodInformation
-        fields = ['name', 'density', 'caloricDensity']
-
-
-class ExerciseForm(ModelForm):
-    class Meta:
-        model = ExerciseInformation
-        fields = ['name', 'calPerHour']
-

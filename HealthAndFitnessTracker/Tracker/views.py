@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
+import datetime
 from django.views.generic import ListView
 from .models import *
 
@@ -36,13 +37,12 @@ class settingsAndProfile(TemplateView):
 class createUser(FormView):
     template_name = "createUser.html"
     form_class = UserInformationForm
-    success_url = '/home'
 
     def post(self, request):
         if request.method == "POST":
             form = UserInformationForm(request.POST)
             if form.is_valid():
-                new_user = User.objects.create_user(**form.cleaned_data)
+                User.objects.create_user(**form.cleaned_data)
                 # redirect, or however you want to get to the main view
                 return HttpResponseRedirect('/home/')
         else:
@@ -50,4 +50,22 @@ class createUser(FormView):
 
         return render(request, 'createUser.html', {'form': form})
 
+class addfood(FormView):
+    template_name = "addfood.html"
+    form_class = FoodForm
+
+    def post(self, request):
+        if request.method == "POST":
+            form = FoodForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(username=request.user.username)
+                instance = form.save(commit=False)
+                instance.user = user
+                instance.save()
+                # redirect, or however you want to get to the main view
+                return HttpResponseRedirect('/foodTracker/')
+        else:
+            form = FoodForm()
+
+        return render(request, 'addfood.html', {'form': form})
 

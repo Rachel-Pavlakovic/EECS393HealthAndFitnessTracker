@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class FoodForm(ModelForm):
     class Meta:
-        model = FoodInformation
-        fields = ['name', 'density', 'caloricDensity']
+        model = FoodLog
+        fields = ['name', 'quantity']
 
 class DrinkForm(ModelForm):
     class Meta:

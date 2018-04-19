@@ -19,19 +19,15 @@ class foodTracker(ListView):
 
 
 class waterTracker(TemplateView):
-
     template_name = "waterTracker.html"
 
 class exerciseTracker(TemplateView):
-
     template_name = "exerciseTracker.html"
 
 class settingsAndProfile(TemplateView):
-
     template_name = "settingsAndProfile.html"
 
 class createUser(FormView):
-
     template_name = "createUser.html"
     form_class = UserInformationForm
     success_url = '/home'

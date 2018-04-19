@@ -5,15 +5,18 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
-
+from django.views.generic import ListView
+from .models import *
 
 class HomePageView(TemplateView):
-
     template_name = "home.html"
 
-class foodTracker(TemplateView):
-
+class foodTracker(ListView):
     template_name = "foodTracker.html"
+
+    def get_queryset(self):
+        return FoodLog.objects.all()
+
 
 class waterTracker(TemplateView):
 
@@ -44,3 +47,5 @@ class createUser(FormView):
             form = UserInformationForm()
 
         return render(request, 'createUser.html', {'form': form})
+
+

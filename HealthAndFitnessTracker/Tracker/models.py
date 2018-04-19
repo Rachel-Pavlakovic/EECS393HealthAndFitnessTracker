@@ -73,11 +73,10 @@ class FoodLog(models.Model):
 class DrinkLog(models.Model):
     name = models.CharField(max_length=128)
     quantity = models.IntegerField(default=0)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
@@ -87,11 +86,10 @@ class DrinkLog(models.Model):
 class ExerciseLog(models.Model):
     name = models.CharField(max_length=128)
     duration = models.IntegerField(default=0)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 

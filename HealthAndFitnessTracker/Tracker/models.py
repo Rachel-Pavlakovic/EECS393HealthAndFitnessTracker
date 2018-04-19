@@ -35,22 +35,22 @@ class User(models.Model):
     gender = models.CharField(max_length=25)
 
     UNITCHOICE = (
-        (0, 'Imperial'),
-        (1, 'Metric'),
+        ('IMPERIAL', 'imperial'),
+        ('METRIC', 'metric'),
     )
     NOTIFCHOICE = (
-        (0, 'email'),
-        (1, 'phone'),
-        (2, 'web'),
+        ('EMAIL', 'email'),
+        ('PHONE', 'phone'),
+        ('WEB', 'web'),
     )
 
-    units = models.CharField(max_length=1, choices = UNITCHOICE)
-    notificationType = models.CharField(max_length=1, choices = NOTIFCHOICE)
+    units = models.CharField(max_length=10, choices = UNITCHOICE, default = 'IMPERIAL')
+    notificationType = models.CharField(max_length=10, choices = NOTIFCHOICE, default = 'EMAIL')
     phoneNumber = models.CharField(max_length=10)
     email = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class FoodLog(models.Model):

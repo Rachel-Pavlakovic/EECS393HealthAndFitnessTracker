@@ -13,6 +13,9 @@ class DrinkForm(ModelForm):
         fields = ['name', 'calPerFlOz']
 
 class ExerciseForm(ModelForm):
+    """
+    For storing exercise information
+    """
     class Meta:
         model = ExerciseInformation
         fields = ['name', 'calPerHour']

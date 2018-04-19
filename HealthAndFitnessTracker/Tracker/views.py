@@ -1,14 +1,4 @@
 from django.views.generic.base import TemplateView
-<<<<<<< HEAD
-
-class HomePageView(TemplateView):
-
-    template_name = "home.html"
-
-class foodTracker(TemplateView):
-
-    template_name = "foodTracker.html"
-=======
 from .forms import *
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
@@ -27,24 +17,17 @@ class foodTracker(ListView):
     def get_queryset(self):
         return FoodLog.objects.all()
 
->>>>>>> 914ac0928ea11b4484203107e5ecdb74e764c170
 
 class waterTracker(TemplateView):
-
     template_name = "waterTracker.html"
-<<<<<<< HEAD
-=======
 
 class exerciseTracker(TemplateView):
-
     template_name = "exerciseTracker.html"
 
 class settingsAndProfile(TemplateView):
-
     template_name = "settingsAndProfile.html"
 
 class createUser(FormView):
-
     template_name = "createUser.html"
     form_class = UserInformationForm
     success_url = '/home'
@@ -60,15 +43,10 @@ class createUser(FormView):
             form = UserInformationForm()
 
         return render(request, 'createUser.html', {'form': form})
->>>>>>> 914ac0928ea11b4484203107e5ecdb74e764c170
 
 class exerciseTracker(TemplateView):
-
-<<<<<<< HEAD
     template_name = "exerciseTracker.html"
 
 class settingsAndProfile(TemplateView):
-
     template_name = "settingsAndProfile.html"
-=======
->>>>>>> 914ac0928ea11b4484203107e5ecdb74e764c170
+

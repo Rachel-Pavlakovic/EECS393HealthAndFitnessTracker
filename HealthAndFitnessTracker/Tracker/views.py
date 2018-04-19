@@ -44,9 +44,4 @@ class createUser(FormView):
 
         return render(request, 'createUser.html', {'form': form})
 
-class exerciseTracker(TemplateView):
-    template_name = "exerciseTracker.html"
-
-class settingsAndProfile(TemplateView):
-    template_name = "settingsAndProfile.html"
 

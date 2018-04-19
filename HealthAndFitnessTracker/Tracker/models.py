@@ -1,17 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
 import datetime
-from enum import Enum
-
-class unit(Enum):
-    Imperial = 0
-    Metric = 1
-
-class notif(Enum):
-    email = 0
-    phone = 1
-    web = 2
-
 
 class DrinkInformation(models.Model):
     name = models.CharField(max_length=128)
@@ -23,8 +12,8 @@ class DrinkInformation(models.Model):
       
 class FoodInformation(models.Model):
     name = models.CharField(max_length=128)
-    denisty = models.FloatField()
-    caloricDensity = models.FloatField()
+    density = models.FloatField(default=0.0)
+    caloricDensity = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.name
@@ -40,12 +29,23 @@ class ExerciseInformation(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=128)
-    passord = models.CharField(max_length=128)
+    password = models.CharField(max_length=128)
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gender = models.CharField(max_length=25)
-    units = unit
-    notificationType = notif
+
+    UNITCHOICE = (
+        (0, 'Imperial'),
+        (1, 'Metric'),
+    )
+    NOTIFCHOICE = (
+        (0, 'email'),
+        (1, 'phone'),
+        (2, 'web'),
+    )
+
+    units = models.CharField(max_length=1, choices = UNITCHOICE)
+    notificationType = models.CharField(max_length=1, choices = NOTIFCHOICE)
     phoneNumber = models.CharField(max_length=10)
     email = models.CharField(max_length=128)
 
@@ -59,7 +59,10 @@ class FoodLog(models.Model):
     date = models.DateField()
     time = models.TimeField()
     calories = models.IntegerField(default=0)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.name
@@ -70,7 +73,10 @@ class DrinkLog(models.Model):
     date = models.DateField()
     time = models.TimeField()
     calories = models.IntegerField(default=0)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.name
@@ -81,7 +87,10 @@ class ExerciseLog(models.Model):
     date = models.DateField()
     time = models.TimeField()
     calories = models.IntegerField(default=0)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.name

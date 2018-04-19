@@ -114,8 +114,11 @@ class ExerciseForm(ModelForm):
         model = ExerciseInformation
         fields = ['name', 'calPerHour']
 
+<<<<<<< HEAD
 
 class UserInformationForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email'] 
+=======
+>>>>>>> 914ac0928ea11b4484203107e5ecdb74e764c170

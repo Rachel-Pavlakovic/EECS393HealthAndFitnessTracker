@@ -25,4 +25,3 @@ class UserInformationForm(ModelForm):
         model = User
        # fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
         fields = ['username', 'password', 'email']
-

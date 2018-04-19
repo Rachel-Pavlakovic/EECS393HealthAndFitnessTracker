@@ -69,7 +69,13 @@
 
 <div class="section">
     <h1>See Food History</h1>
-    <p>This is where we should allow the users to see their past day/week/month and their food or calorie intake</p>
+
+    {% for food in object_list %}
+    <p> {% {{food.date}} %} {% {{food.time}} %} </p>
+    <p> {% {{food.name}} %} </p>
+    <p> {% {{food.quantity}} %} {% {{food.calories}} %} </p>
+    (% end for %)
+
 </div>
 
 <div class="navbar">

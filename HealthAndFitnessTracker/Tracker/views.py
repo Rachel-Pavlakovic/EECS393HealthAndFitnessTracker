@@ -1,15 +1,17 @@
 from django.views.generic.base import TemplateView
 from .forms import *
 from django.views.generic.edit import FormView
+from .models import *
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView
-from .models import *
 import datetime
 
+
 class HomePageView(TemplateView):
+
     template_name = "home.html"
 
 class foodTracker(ListView):
@@ -32,9 +34,11 @@ class exerciseTracker(ListView):
         return ExerciseLog.objects.all()
 
 class settingsAndProfile(TemplateView):
+
     template_name = "settingsAndProfile.html"
 
 class createUser(FormView):
+
     template_name = "createUser.html"
     form_class = UserInformationForm
 
@@ -49,6 +53,7 @@ class createUser(FormView):
             form = UserInformationForm()
 
         return render(request, 'createUser.html', {'form': form})
+
 
 class addfood(FormView):
     template_name = "addfood.html"
@@ -68,4 +73,3 @@ class addfood(FormView):
             form = FoodForm()
 
         return render(request, 'addfood.html', {'form': form})
-

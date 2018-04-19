@@ -18,11 +18,17 @@ class foodTracker(ListView):
         return FoodLog.objects.all()
 
 
-class waterTracker(TemplateView):
+class waterTracker(ListView):
     template_name = "waterTracker.html"
 
-class exerciseTracker(TemplateView):
+    def get_queryset(self):
+        return DrinkLog.objects.all()
+
+class exerciseTracker(ListView):
     template_name = "exerciseTracker.html"
+
+    def get_queryset(self):
+        return ExerciseLog.objects.all()
 
 class settingsAndProfile(TemplateView):
     template_name = "settingsAndProfile.html"

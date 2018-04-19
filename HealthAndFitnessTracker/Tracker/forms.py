@@ -29,6 +29,9 @@ drink = DrinkInformation.objects.get(pk=1)
 drinkForm = DrinkForm(instance=food)
 
 class ExerciseForm(ModelForm):
+    """
+    For storing exercise information
+    """
     class Meta:
         model = ExerciseInformation
         fields = ['name', 'calPerHour']

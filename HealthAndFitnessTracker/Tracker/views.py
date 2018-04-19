@@ -1,34 +1,21 @@
-from django.contrib import auth
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
-from django.views.generic import *
-from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
+class HomePageView(TemplateView):
 
-def index(request):
-    return HttpResponse("Please log in")
+    template_name = "home.html"
 
+class foodTracker(TemplateView):
 
-class LoginView(View):
-    """ Logs in and redirects to the homepage """
+    template_name = "foodTracker.html"
 
-    def post(self, request, *args, **kwargs):
-        user = auth.authenticate(
-            username=request.POST['username'],
-            password=request.POST['password']
-        )
-        if user is not None:
-            if user.is_active:
-                auth.login(request, user)
-        return HttpResponseRedirect(reverse('Tracker:home'))
+class waterTracker(TemplateView):
 
-    def get(self, request, *args, **kwargs):
-        # we should never get to this code path
-        return HttpResponseRedirect(reverse('Tracker:home'))
+    template_name = "waterTracker.html"
 
+class exerciseTracker(TemplateView):
 
-def home(request):
-    """ Renders home page """
-    context = {
-    }
-    return render(request, 'home.html', context)
+    template_name = "exerciseTracker.html"
+
+class settingsAndProfile(TemplateView):
+
+    template_name = "settingsAndProfile.html"

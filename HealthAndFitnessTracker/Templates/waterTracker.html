@@ -67,8 +67,12 @@
 </div>
 
 <div class="section">
-    <h1>See Water History</h1>
-    <p>This is where we should allow the users to see their past day/week/month of water intake (maybe also calculate the average amount of water they drink a day)</p>
+    <h1>See Drink History</h1>
+    {% for drink in object_list %}
+    <p> {{drink.date}} {{drink.time}} </p>
+    <p> {{drink.name}} </p>
+    <p> {{drink.quantity}} {{drink.calories}} </p>
+    {% endfor %}
 </div>
 
 <div class="navbar">

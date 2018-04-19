@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^waterTracker', login_required(waterTracker.as_view()), name='waterTracker'),
     url(r'^exerciseTracker', login_required(exerciseTracker.as_view()), name='exerciseTracker'),
     url(r'^settingsAndProfile', login_required(settingsAndProfile.as_view()), name='settingsAndProfile'),
+    url(r'^createUser', createUser.as_view(), name='createUser'),
     url(r'^admin/', admin.site.urls),
 ]

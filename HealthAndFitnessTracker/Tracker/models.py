@@ -114,8 +114,3 @@ class ExerciseForm(ModelForm):
         model = ExerciseInformation
         fields = ['name', 'calPerHour']
 
-
-class UserInformationForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email'] 

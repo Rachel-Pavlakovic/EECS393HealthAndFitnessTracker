@@ -10,7 +10,7 @@ Users have the option to set up alerts and reminders for things like drinking or
 4. start developing
 5. run `deactivate` when finished
 
-# To set up virtual environment (Windows):
+# To set up virtual environment (Windows) :
 1. Install to your python `pip install virtualenv`
 2. Setup environment folder `virtualenv venv`
 3. Start virtual environment `source venv/Scripts/activate`

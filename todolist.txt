@@ -1,0 +1,19 @@
+Look at the classes on the latest document
+	to separate it properly, we need to consider populating a database
+		create a new account on login page
+		create new stuff for database (food, new alarm etc)
+		create the databases themselves
+	html pages
+		design each one
+		connect each one together
+		javascript?
+	version control
+		github
+		commit -m "your message"
+		git branch tom
+		git checkout tom
+		git merge
+	unit testing
+		import unittest
+		see http://www.onlamp.com/pub/a/python/2004/12/02/tdd_pyunit.html
+		unit test each action generally

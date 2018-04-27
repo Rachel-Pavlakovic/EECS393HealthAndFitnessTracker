@@ -63,7 +63,7 @@
     <h1>See Drink History</h1>
     {% for drink in object_list %}
     <p> {{drink.date}} {{drink.time}} </p>
-    <p> {{drink.name}} </p>
+    <p> {{drink.info.name}} </p>
     <p> {{drink.quantity}} {{drink.calories}} </p>
     {% endfor %}
 </div>

@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class DrinkInformation(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, primary_key=True)
     calPerFlOz = models.IntegerField(default=0)
     
     def __str__(self):
@@ -14,7 +14,7 @@ class DrinkInformation(models.Model):
 
       
 class FoodInformation(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, primary_key=True)
     density = models.FloatField(default=0.0)
     caloricDensity = models.FloatField(default=0.0)
 
@@ -23,16 +23,18 @@ class FoodInformation(models.Model):
 
 
 class ExerciseInformation(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, primary_key=True)
     calPerHour = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
 
 
-class User(models.Model):
-    username = models.CharField(max_length=128)
-    password = models.CharField(max_length=128)
+class UserInformation(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gender = models.CharField(max_length=25)
@@ -57,7 +59,10 @@ class User(models.Model):
 
 
 class FoodLog(models.Model):
-    name = models.CharField(max_length=128)
+    info = models.ForeignKey(
+        'FoodInformation',
+        on_delete=models.CASCADE,
+    )
     quantity = models.IntegerField(default=0)
     #usage
     date = models.DateTimeField(default=datetime.now())
@@ -68,10 +73,13 @@ class FoodLog(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.info.name
 
 class DrinkLog(models.Model):
-    name = models.CharField(max_length=128)
+    info = models.ForeignKey(
+        'DrinkInformation',
+        on_delete=models.CASCADE,
+    )
     quantity = models.IntegerField(default=0)
     date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
@@ -81,10 +89,13 @@ class DrinkLog(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.info.name
 
 class ExerciseLog(models.Model):
-    name = models.CharField(max_length=128)
+    info = models.ForeignKey(
+        'ExerciseInformation',
+        on_delete=models.CASCADE,
+    )
     duration = models.IntegerField(default=0)
     date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
@@ -94,4 +105,4 @@ class ExerciseLog(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.info.name

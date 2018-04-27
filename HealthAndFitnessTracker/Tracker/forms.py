@@ -5,20 +5,20 @@ from django.contrib.auth.models import User
 class FoodForm(ModelForm):
     class Meta:
         model = FoodLog
-        fields = ['name', 'quantity']
+        fields = ['info','quantity', 'date']
 
 class DrinkForm(ModelForm):
     class Meta:
         model = DrinkLog
-        fields = ['name', 'quantity']
+        fields = ['info','quantity', 'date']
 
 class ExerciseForm(ModelForm):
     class Meta:
         model = ExerciseLog
-        fields = ['name', 'duration']
+        fields = ['info','duration', 'date']
 
 class UserInformationForm(ModelForm):
     class Meta:
-        model = User
+        model = UserInformation
        # fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
-        fields = ['username', 'password', 'email']
+        fields = ['email']

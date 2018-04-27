@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             name='DrinkLog',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
+                ('info', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Tracker.drinkInformation')),
                 ('quantity', models.IntegerField(default=0)),
                 ('date', models.DateField()),
                 ('time', models.TimeField()),
@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
             name='ExerciseLog',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
+                ('info', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Tracker.exerciseInformation')),
                 ('duration', models.IntegerField(default=0)),
                 ('date', models.DateField()),
                 ('time', models.TimeField()),
@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
             name='FoodLog',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=128)),
+                ('info', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Tracker.foodInformation')),
                 ('quantity', models.IntegerField(default=0)),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('calories', models.IntegerField(default=0)),

@@ -9,20 +9,16 @@ class FoodForm(ModelForm):
 
 class DrinkForm(ModelForm):
     class Meta:
-        model = DrinkInformation
-        fields = ['name', 'calPerFlOz']
+        model = DrinkLog
+        fields = ['name', 'quantity']
 
 class ExerciseForm(ModelForm):
-    """
-    For storing exercise information
-    """
     class Meta:
-        model = ExerciseInformation
-        fields = ['name', 'calPerHour']
+        model = ExerciseLog
+        fields = ['name', 'duration']
 
 class UserInformationForm(ModelForm):
     class Meta:
         model = User
        # fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
         fields = ['username', 'password', 'email']
-

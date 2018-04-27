@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/login/'}, name="logout"),
+    url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^home', HomePageView.as_view(), name='home'),
     url(r'^foodTracker', login_required(foodTracker.as_view()), name='foodTracker'),
@@ -30,5 +30,7 @@ urlpatterns = [
     url(r'^settingsAndProfile', login_required(settingsAndProfile.as_view()), name='settingsAndProfile'),
     url(r'^createUser', createUser.as_view(), name='createUser'),
     url(r'^addfood', addfood.as_view(), name='addfood'),
+    url(r'^adddrink', adddrink.as_view(), name='adddrink'),
+    url(r'^addexercise', addexercise.as_view(), name='addexercise'),
     url(r'^admin/', admin.site.urls),
 ]

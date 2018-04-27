@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Create New User{% endblock %}
+{% block title %}Add Drink{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
+  <h2>Add Drink</h2>
   <form method="post"> 
     {% for field in form %}
         {% csrf_token %}
@@ -15,6 +15,6 @@
             {% endif %}
         </div>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button type="submit">Add Drink</button>
   </form>
 {% endblock %}

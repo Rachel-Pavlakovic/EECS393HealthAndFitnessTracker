@@ -38,22 +38,22 @@ class User(models.Model):
     gender = models.CharField(max_length=25)
 
     UNITCHOICE = (
-        ('IMPERIAL', 'imperial'),
-        ('METRIC', 'metric'),
+        (0, 'Imperial'),
+        (1, 'Metric'),
     )
     NOTIFCHOICE = (
-        ('EMAIL', 'email'),
-        ('PHONE', 'phone'),
-        ('WEB', 'web'),
+        (0, 'email'),
+        (1, 'phone'),
+        (2, 'web'),
     )
 
-    units = models.CharField(max_length=10, choices = UNITCHOICE, default = 'IMPERIAL')
-    notificationType = models.CharField(max_length=10, choices = NOTIFCHOICE, default = 'EMAIL')
+    units = models.CharField(max_length=1, choices = UNITCHOICE)
+    notificationType = models.CharField(max_length=1, choices = NOTIFCHOICE)
     phoneNumber = models.CharField(max_length=10)
     email = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.username
+        return self.name
 
 
 class FoodLog(models.Model):
@@ -73,11 +73,10 @@ class FoodLog(models.Model):
 class DrinkLog(models.Model):
     name = models.CharField(max_length=128)
     quantity = models.IntegerField(default=0)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
@@ -87,11 +86,10 @@ class DrinkLog(models.Model):
 class ExerciseLog(models.Model):
     name = models.CharField(max_length=128)
     duration = models.IntegerField(default=0)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateTimeField(default=datetime.now())
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 

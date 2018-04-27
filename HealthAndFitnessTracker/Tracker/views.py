@@ -6,15 +6,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
-<<<<<<< HEAD
-import datetime
-from django.views.generic import ListView
-from .models import *
-=======
 from django.views.generic import ListView
 import datetime
 
->>>>>>> 1860e1f8eb2606b6f19b0f365742ec3f7c03e0dc
 
 class HomePageView(TemplateView):
 
@@ -60,10 +54,7 @@ class createUser(FormView):
 
         return render(request, 'createUser.html', {'form': form})
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 1860e1f8eb2606b6f19b0f365742ec3f7c03e0dc
 class addfood(FormView):
     template_name = "addfood.html"
     form_class = FoodForm
@@ -82,7 +73,41 @@ class addfood(FormView):
             form = FoodForm()
 
         return render(request, 'addfood.html', {'form': form})
-<<<<<<< HEAD
 
-=======
->>>>>>> 1860e1f8eb2606b6f19b0f365742ec3f7c03e0dc
+class adddrink(FormView):
+    template_name = "adddrink.html"
+    form_class = DrinkForm
+
+    def post(self, request):
+        if request.method == "POST":
+            form = DrinkForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(username=request.user.username)
+                instance = form.save(commit=False)
+                instance.user = user
+                instance.save()
+                # redirect, or however you want to get to the main view
+                return HttpResponseRedirect('/waterTracker/')
+        else:
+            form = FoodForm()
+
+        return render(request, 'adddrink.html', {'form': form})
+
+class addexercise(FormView):
+    template_name = "addexercise.html"
+    form_class = ExerciseForm
+
+    def post(self, request):
+        if request.method == "POST":
+            form = ExerciseForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(username=request.user.username)
+                instance = form.save(commit=False)
+                instance.user = user
+                instance.save()
+                # redirect, or however you want to get to the main view
+                return HttpResponseRedirect('/exerciseTracker/')
+        else:
+            form = FoodForm()
+
+        return render(request, 'addexercise.html', {'form': form})

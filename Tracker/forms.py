@@ -1,0 +1,24 @@
+from django.forms import *
+from .models import *
+from django.contrib.auth.models import User
+
+class FoodForm(ModelForm):
+    class Meta:
+        model = FoodLog
+        fields = ['name', 'quantity']
+
+class DrinkForm(ModelForm):
+    class Meta:
+        model = DrinkLog
+        fields = ['name', 'quantity']
+
+class ExerciseForm(ModelForm):
+    class Meta:
+        model = ExerciseLog
+        fields = ['name', 'duration']
+
+class UserInformationForm(ModelForm):
+    class Meta:
+        model = User
+       # fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
+        fields = ['username', 'password', 'email']

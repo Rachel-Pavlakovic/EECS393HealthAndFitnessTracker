@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(DrinkInformation)
 admin.site.register(FoodInformation)
 admin.site.register(ExerciseInformation)
-admin.site.register(User)
+admin.site.register(UserInformation)
 admin.site.register(FoodLog)
 admin.site.register(DrinkLog)
 admin.site.register(ExerciseLog)

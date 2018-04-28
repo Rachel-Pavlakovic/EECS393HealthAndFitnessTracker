@@ -40,17 +40,17 @@ class settingsAndProfile(TemplateView):
 class createUser(FormView):
 
     template_name = "createUser.html"
-    form_class = UserInformationForm
+    form_class = UserForm
 
     def post(self, request):
         if request.method == "POST":
-            form = UserInformationForm(request.POST)
+            form = UserForm(request.POST)
             if form.is_valid():
                 User.objects.create_user(**form.cleaned_data)
                 # redirect, or however you want to get to the main view
                 return HttpResponseRedirect('/home/')
         else:
-            form = UserInformationForm()
+            form = UserForm()
 
         return render(request, 'createUser.html', {'form': form})
 

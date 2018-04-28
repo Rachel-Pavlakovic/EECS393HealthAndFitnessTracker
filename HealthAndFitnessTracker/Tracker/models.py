@@ -3,6 +3,8 @@ from django.forms import ModelForm
 from datetime import datetime
 from django.conf import settings
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 class DrinkInformation(models.Model):
@@ -106,3 +108,30 @@ class ExerciseLog(models.Model):
 
     def __str__(self):
         return self.info.name
+
+#this function auto generates the calorie content of a newly created or modified drink log
+@receiver(post_save, sender=DrinkLog, dispatch_uid='generate_drink_calories')
+def gen_drink_calorie(sender, instance, **kwargs):
+    if kwargs.get('created', False):
+        temp = instance.info.calPerFlOz
+        total = instance.quantity * temp
+        instance.calories = int(total)
+        instance.save()
+
+#this function auto generates the calorie content of a newly created or modified drink log
+@receiver(post_save, sender=FoodLog, dispatch_uid='generate_food_calories')
+def gen_food_calorie(sender, instance, **kwargs):
+    if kwargs.get('created', False):
+        temp = instance.info.caloricDensity * instance.info.density
+        total = instance.quantity * temp
+        instance.calories = int(total)
+        instance.save()
+
+#this function auto generates the calorie content of a newly created or modified drink log
+@receiver(post_save, sender=ExerciseLog, dispatch_uid='generate_exercise_calories')
+def gen_exercise_calorie(sender, instance, **kwargs):
+    if kwargs.get('created', False):
+        temp = instance.info.calPerHour
+        total = instance.duration * temp
+        instance.calories = int(total)
+        instance.save()

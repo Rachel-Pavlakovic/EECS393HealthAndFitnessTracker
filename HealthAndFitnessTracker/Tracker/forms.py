@@ -17,8 +17,13 @@ class ExerciseForm(ModelForm):
         model = ExerciseLog
         fields = ['info','duration', 'date']
 
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password', 'email']
+
 class UserInformationForm(ModelForm):
     class Meta:
         model = UserInformation
-       # fields = ['username', 'password', 'weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
-        fields = ['email']
+        fields = ['weight', 'height', 'gender', 'units', 'notificationType', 'phoneNumber', 'email']
+

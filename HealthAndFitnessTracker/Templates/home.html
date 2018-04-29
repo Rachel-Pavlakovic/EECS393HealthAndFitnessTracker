@@ -13,7 +13,13 @@
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
-
+        
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+        
         .header {
             padding: 80px;
             text-align: center;
@@ -61,10 +67,50 @@
 </div>
 
 {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}">logout</a>
+    <div class="section">
+        <h1>Alerts Upcoming One Hour</h1>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Set To Time</th>
+                </tr>
+                {% for alert in object_list %}
+                <tr>
+                    <td>{{alert.description}}</td>
+                    <td>{{alert.time}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <div class="section">
+        <h1>Alerts Past Due</h1>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Set To Time</th>
+                </tr>
+                {% for alert in late_alert %}
+                <tr>
+                    <td>{{alert.description}}</td>
+                    <td>{{alert.time}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
     {% else %}
-      <a href="{% url 'login' %}">login</a>
+    <div class="section">
+        <h1>Login below to see alerts and reminders</h1>
     {% endif %}
+    
+{% if user.is_authenticated %}
+    <div class="section">
+          <a href="{% url 'logout' %}">logout</a>
+        {% else %}
+          <a href="{% url 'login' %}">login</a>
+        {% endif %}
+    </div>
 
 </body>
 </html>

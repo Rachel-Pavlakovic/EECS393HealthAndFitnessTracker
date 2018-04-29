@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^addfood', addfood.as_view(), name='addfood'),
     url(r'^adddrink', adddrink.as_view(), name='adddrink'),
     url(r'^addexercise', addexercise.as_view(), name='addexercise'),
+    url(r'^addalert', addalert.as_view(), name='addalert'),
     url(r'^admin/', admin.site.urls),
 ]

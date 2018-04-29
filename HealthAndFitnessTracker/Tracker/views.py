@@ -1,41 +1,61 @@
 from django.views.generic.base import TemplateView
 from .forms import *
 from django.views.generic.edit import FormView
-from .models import *
+from Tracker.models import *
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView
-import datetime
 
 
-class HomePageView(TemplateView):
+class HomePageView(ListView):
 
     template_name = "home.html"
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            q = AlertLog.objects.all()
+            q_ids = [o.id for o in q if o.upcomingonehour()]
+            query_results = AlertLog.objects.filter(id__in=q_ids, user=self.request.user)
+            return query_results
+        else:
+            return None
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(HomePageView, self).get_context_data(*args, **kwargs)
+        if self.request.user.is_authenticated:
+            q = AlertLog.objects.all()
+            q_ids = [o.id for o in q if o.alertlate()]
+            context['late_alert'] = AlertLog.objects.filter(id__in=q_ids, user=self.request.user)
+            return context
+        else:
+            return None
 
 class foodTracker(ListView):
     template_name = "foodTracker.html"
 
     def get_queryset(self):
-        return FoodLog.objects.all()
+        return FoodLog.objects.filter(user=self.request.user)
 
 
 class waterTracker(ListView):
     template_name = "waterTracker.html"
 
     def get_queryset(self):
-        return DrinkLog.objects.all()
+        return DrinkLog.objects.filter(user=self.request.user)
 
 class exerciseTracker(ListView):
     template_name = "exerciseTracker.html"
 
     def get_queryset(self):
-        return ExerciseLog.objects.all()
+        return ExerciseLog.objects.filter(user=self.request.user)
 
-class settingsAndProfile(TemplateView):
+class settingsAndProfile(ListView):
 
     template_name = "settingsAndProfile.html"
+
+    def get_queryset(self):
+        return AlertLog.objects.filter(user=self.request.user)
 
 class createUser(FormView):
 
@@ -89,7 +109,7 @@ class adddrink(FormView):
                 # redirect, or however you want to get to the main view
                 return HttpResponseRedirect('/waterTracker/')
         else:
-            form = FoodForm()
+            form = DrinkForm()
 
         return render(request, 'adddrink.html', {'form': form})
 
@@ -108,6 +128,25 @@ class addexercise(FormView):
                 # redirect, or however you want to get to the main view
                 return HttpResponseRedirect('/exerciseTracker/')
         else:
-            form = FoodForm()
+            form = ExerciseForm()
 
         return render(request, 'addexercise.html', {'form': form})
+
+class addalert(FormView):
+    template_name = "addalert.html"
+    form_class = AlertForm
+
+    def post(self, request):
+        if request.method == "POST":
+            form = AlertForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(username=request.user.username)
+                instance = form.save(commit=False)
+                instance.user = user
+                instance.save()
+                # redirect, or however you want to get to the main view
+                return HttpResponseRedirect('/settingsAndProfile/')
+        else:
+            form = AlertForm()
+
+        return render(request, 'alertform.html', {'form': form})

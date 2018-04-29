@@ -1,6 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 from datetime import datetime
+import datetime as dt
 from django.conf import settings
 from django.utils import timezone
 from django.dispatch import receiver
@@ -10,9 +11,6 @@ from django.db.models.signals import post_save
 class DrinkInformation(models.Model):
     name = models.CharField(max_length=128, primary_key=True)
     calPerFlOz = models.IntegerField(default=0)
-    
-    def __str__(self):
-        return self.name
 
       
 class FoodInformation(models.Model):
@@ -20,16 +18,25 @@ class FoodInformation(models.Model):
     density = models.FloatField(default=0.0)
     caloricDensity = models.FloatField(default=0.0)
 
-    def __str__(self):
-        return self.name
-
 
 class ExerciseInformation(models.Model):
     name = models.CharField(max_length=128, primary_key=True)
     calPerHour = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.name
+
+class AlertLog(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    description = models.CharField(max_length=200)
+    time = models.DateTimeField(default=timezone.now)
+
+    def upcomingonehour(self):
+        return timezone.now() <= self.time and self.time <= (timezone.now() + dt.timedelta(hours=1))
+
+    def alertlate(self):
+        return self.time < timezone.now()
 
 
 class UserInformation(models.Model):
@@ -54,10 +61,7 @@ class UserInformation(models.Model):
     units = models.CharField(max_length=1, choices = UNITCHOICE)
     notificationType = models.CharField(max_length=1, choices = NOTIFCHOICE)
     phoneNumber = models.CharField(max_length=10)
-    email = models.CharField(max_length=128)
 
-    def __str__(self):
-        return self.name
 
 
 class FoodLog(models.Model):
@@ -67,15 +71,13 @@ class FoodLog(models.Model):
     )
     quantity = models.IntegerField(default=0)
     #usage
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now)
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.info.name
 
 class DrinkLog(models.Model):
     info = models.ForeignKey(
@@ -83,15 +85,13 @@ class DrinkLog(models.Model):
         on_delete=models.CASCADE,
     )
     quantity = models.IntegerField(default=0)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now)
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.info.name
 
 class ExerciseLog(models.Model):
     info = models.ForeignKey(
@@ -99,15 +99,13 @@ class ExerciseLog(models.Model):
         on_delete=models.CASCADE,
     )
     duration = models.IntegerField(default=0)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now)
     calories = models.IntegerField(default=0)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
-        return self.info.name
 
 #this function auto generates the calorie content of a newly created or modified drink log
 @receiver(post_save, sender=DrinkLog, dispatch_uid='generate_drink_calories')

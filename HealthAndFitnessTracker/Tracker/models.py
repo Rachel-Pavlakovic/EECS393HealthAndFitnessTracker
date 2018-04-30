@@ -40,26 +40,27 @@ class AlertLog(models.Model):
 
 
 class UserInformation(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        primary_key=True,
     )
     weight = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     gender = models.CharField(max_length=25)
 
     UNITCHOICE = (
-        (0, 'Imperial'),
-        (1, 'Metric'),
+        ('IMPERIAL', 'Imperial'),
+        ('METRIC', 'Metric'),
     )
     NOTIFCHOICE = (
-        (0, 'email'),
-        (1, 'phone'),
-        (2, 'web'),
+        ('EMAIL', 'email'),
+        ('PHONE', 'phone'),
+        ('WEB', 'web'),
     )
 
-    units = models.CharField(max_length=1, choices = UNITCHOICE)
-    notificationType = models.CharField(max_length=1, choices = NOTIFCHOICE)
+    units = models.CharField(max_length=8, choices = UNITCHOICE)
+    notificationType = models.CharField(max_length=5, choices = NOTIFCHOICE)
     phoneNumber = models.CharField(max_length=10)
 
 
@@ -112,7 +113,12 @@ class ExerciseLog(models.Model):
 def gen_drink_calorie(sender, instance, **kwargs):
     if kwargs.get('created', False):
         temp = instance.info.calPerFlOz
-        total = instance.quantity * temp
+        userPreference = UserInformation.objects.get(user=instance.user)
+        #dividing by 29.5735 converts the calories per floz to calories per ml
+        if(userPreference.units == 'METRIC'):
+            total = (instance.quantity * temp) / 29.5735
+        else:
+            total = instance.quantity * temp
         instance.calories = int(total)
         instance.save()
 
@@ -120,8 +126,13 @@ def gen_drink_calorie(sender, instance, **kwargs):
 @receiver(post_save, sender=FoodLog, dispatch_uid='generate_food_calories')
 def gen_food_calorie(sender, instance, **kwargs):
     if kwargs.get('created', False):
-        temp = instance.info.caloricDensity * instance.info.density
-        total = instance.quantity * temp
+        userPreference = UserInformation.objects.get(user=instance.user)
+        #calorie density is cal per 100g
+        #multiplying by 28.3495 converts from grams to oz (all of our math for food is in metric)
+        if (userPreference.units == 'METRIC'):
+            total = (instance.quantity * instance.info.caloricDensity) /100
+        else:
+            total = (28.3495 * instance.quantity * instance.info.caloricDensity) / 100
         instance.calories = int(total)
         instance.save()
 

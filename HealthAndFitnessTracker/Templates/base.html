@@ -44,9 +44,10 @@
     </style>
 </head>
 <body>
-  <header>
+ <div class="header">
     <h1>Health and Fitness Tracker</h1>
-  </header>
+    <h2>Please Log In Below</h2>
+  </div>
   <hr>
   <main>
     {% block content %}
@@ -56,9 +57,9 @@
   <div class="navbar">
 
     {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}" class="left">logout</a>
+      <a href="{% url 'logout' %}" class="left">Logout</a>
     {% else %}
-      <a href="{% url 'login' %}" class="left">login</a>
+      <a href="{% url 'login' %}" class="left">Login</a>
     {% endif %}
 
   <a href="/home/" class="right">Home</a>

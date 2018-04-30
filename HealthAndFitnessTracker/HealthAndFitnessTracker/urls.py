@@ -35,4 +35,5 @@ urlpatterns = [
     url(r'^addalert', addalert.as_view(), name='addalert'),
     url(r'^admin/', admin.site.urls),
     url(r'^updateProfile', login_required(updateProfile.as_view()), name='updateProfile'),
+    url(r'^alerts', login_required(alerts.as_view()), name='alerts'),
 ]

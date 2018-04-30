@@ -55,6 +55,12 @@ class settingsAndProfile(ListView):
     template_name = "settingsAndProfile.html"
 
     def get_queryset(self):
+        return UserInformation.objects.filter(user=self.request.user)
+
+class alerts(ListView):
+    template_name = "alerts.html"
+
+    def get_queryset(self):
         return AlertLog.objects.filter(user=self.request.user)
 
 class createUser(FormView):

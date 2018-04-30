@@ -62,35 +62,19 @@
   <a href="/foodTracker/">Food Log</a>
   <a href="/waterTracker/">Water Log</a>
   <a href="/exerciseTracker/">Exercise Log</a>
+    <a href="/alerts/" class ="right">Alerts</a>
   <a href="/settingsAndProfile/" class="right">Profile and Settings</a>
 </div>
 
 <div class="section">
     <h1>User Profile:</h1>
-    <a>Username:  {{ user.username }}  <br /> Email: {{ user.email }}</a>
-    <a><br/>Height: {{ userInformation.height }} <br/> Weight: {{ userInformation.weight }} <br/> Gender: {{ userInformation.gender }}</a>
-    <a><br/>Notification type: {{ userInformation.notificationType }} <br/> Phone Number: {{ userInformation.phoneNumber }}</a>
-    <a><br/>Unit preference: {{ userInformation.units }}<br/><br/></a>
+    <a>Username:  {{user.username}}  <br /> Email: {{user.email}}</a>
+    <a><br/>Height: {{UserInformation.height}} <br/> Weight: {{UserInformation.weight}} <br/> Gender: {{UserInformation.gender}}</a>
+    <a><br/>Notification type: {{UserInformation.notificationType}} <br/> Phone Number: {{UserInformation.phoneNumber}}</a>
+    <a><br/>Unit preference: {{UserInformation.units}}<br/><br/></a>
     <a href="/updateProfile/">Update your user profile</a>
 </div>
 
-<div class="section">
-    <h1>Alerts</h1>
-    <a href="/addalert/">Add a New Alert to your log</a>
-        <table>
-            <tr>
-                <th>Description</th>
-                <th>Set To Time</th>
-            </tr>
-            {% for alert in object_list %}
-            <tr>
-                <td>{{alert.description}}</td>
-                <td>{{alert.time}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-</div>
 
 <div class="navbar">
 
@@ -102,7 +86,6 @@
 
     <a href="/home/" class="right">Home</a>
 </div>
-
 
 </body>
 </html>

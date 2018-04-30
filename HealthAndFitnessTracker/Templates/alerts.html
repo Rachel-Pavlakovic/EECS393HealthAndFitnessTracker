@@ -19,7 +19,6 @@
             padding: 5px;
             text-align: center;
         }
-
         .header {
             padding: 80px;
             text-align: center;
@@ -55,7 +54,7 @@
 <body>
 
 <div class="header">
-  <h1>Food Log</h1>
+  <h1>Profile and Settings</h1>
   <p>Welcome {{ user.username }}!</p>
 </div>
 
@@ -68,34 +67,22 @@
 </div>
 
 <div class="section">
-    <h1>Add Food:</h1>
-    <a href="/addfood/">Add a New Food to your log</a>
-</div>
-
-<div class="section">
-    <h1>See Food History</h1>
-
-    <table>
-        <tr>
-            <th>Date & Time</th>
-            <th>Name</th>
-            <th>Quantity (Items)</th>
-            <th>Calories</th>
-        </tr>
-        {% for food in object_list %}
-        <tr>
-            <td>{{food.date}}</td>
-            <!-- <td>{{food.time}}</td>
-            We seem to not have anything in this table. w/e
-            -->
-            <td>{{food.info.name}}</td>
-            <td>{{food.quantity}}</td>
-            <td>{{food.calories}}</td>
-        </tr>
+    <h1>Alerts</h1>
+    <a href="/addalert/">Add a New Alert to your log</a>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Set To Time</th>
+            </tr>
+            {% for alert in object_list %}
+            <tr>
+                <td>{{alert.description}}</td>
+                <td>{{alert.time}}</td>
+            </tr>
         {% endfor %}
     </table>
-
 </div>
+
 
 <div class="navbar">
 
@@ -105,9 +92,8 @@
       <a href="{% url 'login' %}" class="left">Login</a>
     {% endif %}
 
-  <a href="/home/" class="right">Home</a>
+    <a href="/home/" class="right">Home</a>
 </div>
 
 </body>
 </html>
-

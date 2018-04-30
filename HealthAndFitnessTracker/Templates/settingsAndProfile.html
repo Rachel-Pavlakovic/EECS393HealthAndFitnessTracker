@@ -69,10 +69,12 @@
 <div class="section">
     <h1>User Profile:</h1>
     <a>Username:  {{user.username}}  <br /> Email: {{user.email}}</a>
-    <a><br/>Height: {{UserInformation.height}} <br/> Weight: {{UserInformation.weight}} <br/> Gender: {{UserInformation.gender}}</a>
-    <a><br/>Notification type: {{UserInformation.notificationType}} <br/> Phone Number: {{UserInformation.phoneNumber}}</a>
-    <a><br/>Unit preference: {{UserInformation.units}}<br/><br/></a>
-    <a href="/updateProfile/">Update your user profile</a>
+    {% for userInfo in object_list %}
+        <a><br/>Height: {{userInfo.height}} <br/> Weight: {{userInfo.weight}} <br/> Gender: {{userInfo.gender}}</a>
+        <a><br/>Notification type: {{userInfo.notificationType}} <br/> Phone Number: {{userInfo.phoneNumber}}</a>
+        <a><br/>Unit preference: {{userInfo.units}}<br/><br/></a>
+        <a href="/updateProfile/">Update your user profile</a>
+    {% endfor %}
 </div>
 
 

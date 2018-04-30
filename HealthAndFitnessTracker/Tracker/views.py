@@ -150,3 +150,22 @@ class addalert(FormView):
             form = AlertForm()
 
         return render(request, 'alertform.html', {'form': form})
+
+class updateProfile(FormView):
+    template_name = "updateProfile.html"
+    form_class = UserInformationForm
+
+    def post(self, request):
+        if request.method == 'POST':
+            form = UserInformationForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(username=request.user.username)
+                instance = form.save(commit=False)
+                instance.user = user
+                instance.save()
+                # redirect, or however you want to get to the main view
+                return HttpResponseRedirect('/settingsAndProfile/')
+        else:
+            form = UserInformationForm()
+
+        return render(request, 'updateProfile.html', {'form': form})
